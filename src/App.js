@@ -1,8 +1,14 @@
+import { Routes, Route, useNavigate } from "react-router-dom";
+
+import Home from "./container/Home";
+import Login from "./container/Login";
+
 const App = () => {
 	return (
-		<h1 className='text-3x1 font-bold underline'>
-			App
-		</h1>
+		<Routes>
+			<Route path='login' element={<Login />} />
+			<Route path='/*' element={<Home />} />
+		</Routes>
 	);
 }
 

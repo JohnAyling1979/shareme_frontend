@@ -4,8 +4,10 @@ import shareVideo from '../assets/share.mp4';
 import logo from '../assets/logowhite.png';
 import { client } from '../client';
 import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 const Login = () => {
+	const [error, setError] = useState(null);
 	const navigate = useNavigate();
 
 	const responseGoogle = response => {
@@ -44,8 +46,13 @@ const Login = () => {
 						<img src={logo} width='130px' alt='logo' />
 					</div>
 					<div className='shadow-2x1'>
-						<GoogleLogin onSuccess={responseGoogle} onError={() => console.log('Error')}/>
+						<GoogleLogin onSuccess={responseGoogle} onError={() => setError('Problem logging in. Please try again.')}/>
 					</div>
+					{error && (
+						<div className="absolute top-16 bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded" role="alert">
+							<span className="block sm:inline">{error}</span>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

@@ -5,8 +5,7 @@ import { Link, Route, Routes } from 'react-router-dom';
 
 import logo from '../assets/logo.png';
 import { Sidebar, UserProfile, Pins } from '../components';
-import { client } from '../client';
-import { userQuery } from '../utils/data';
+import { fetchUser } from '../api/api';
 
 const Home = () => {
 	const [toggleSidebar, setToggleSidebar] = useState(false);
@@ -17,7 +16,7 @@ const Home = () => {
 		const localUser = JSON.parse(localStorage.getItem('user'));
 
 		if (localUser) {
-			client.fetch(userQuery(localUser._id)).then(data => setUser(data[0]));
+			fetchUser(localUser._id, setUser);
 		}
 	}, []);
 

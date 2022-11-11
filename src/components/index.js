@@ -5,4 +5,5 @@ export { default as PinDetail } from './PinDetail';
 export { default as Pins } from './Pins';
 export { default as Search } from './Search';
 export { default as Sidebar } from './Sidebar';
+export { default as Spinner } from './Spinner';
 export { default as UserProfile } from './UserProfile';

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchPins } from "../api/api";
+import MasonryLayout from "./MasonryLayout";
 import Spinner from "./Spinner";
 
 const Feed = () => {
@@ -21,7 +22,11 @@ const Feed = () => {
 		return <Spinner message='We are adding new ideas to your feed!'/>
 	}
 
-	return (<div>Feed</div>);
+	return (
+		<div>
+			<MasonryLayout pins={pins} />
+		</div>
+	);
 }
 
 export default Feed;

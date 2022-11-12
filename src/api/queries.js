@@ -5,6 +5,7 @@ const pinData = `{
 		}
 	},
 	_id,
+	title,
 	destination,
 	postedBy -> {
 		_id,
@@ -26,7 +27,7 @@ export const userQuery = userId => {
 }
 
 export const searchQuery = searchTerm => {
-	return `*[_type == 'pin' && title match '${searchTerm}' || catefory match '${searchTerm}' || about match '${searchTerm}'] ${pinData}`;
+	return `*[_type == 'pin' && title match '${searchTerm}' || category match '${searchTerm}' || about match '${searchTerm}'] ${pinData}`;
 }
 
 export const feedQuery = `*[_type == 'pin'] | order(_createAt desc) ${pinData}`;

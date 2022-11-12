@@ -1,6 +1,8 @@
 export { default as CreatePin } from './CreatePin';
 export { default as Feed } from './Feed';
+export { default as MasonryLayout } from './MasonryLayout';
 export { default as Navbar } from './Navbar';
+export { default as Pin } from './Pin';
 export { default as PinDetail } from './PinDetail';
 export { default as Pins } from './Pins';
 export { default as Search } from './Search';

@@ -6,7 +6,7 @@ import logo from '../assets/logo.png';
 const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize';
 const isActiveStyle = 'flex items-center px-5 gap-3 font-extrabold border-r-2 boarder-black transition-all duration-200 ease-in-out capitalize';
 const categories = [
-	{ name: 'Animals' },
+	{ name: 'Anime' },
 	{ name: 'Walapapers' },
 	{ name: 'Photography' },
 	{ name: 'Gaming' },

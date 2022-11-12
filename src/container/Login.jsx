@@ -10,7 +10,7 @@ const Login = () => {
 	const [error, setError] = useState(null);
 	const navigate = useNavigate();
 
-	const responseGoogle = response => {
+	const responseGoogle = async response => {
 		if (response.credential) {
 			const decodedCredentials = jwt_decode(response.credential);
 			const { name, picture, sub } = decodedCredentials;
@@ -21,11 +21,11 @@ const Login = () => {
 				image: picture,
 			};
 
-			client.createIfNotExists(doc)
-				.then(() => {
-					localStorage.setItem('user', JSON.stringify(doc));
-					navigate('/', { replace: true });
-				});
+			const user = await client.createIfNotExists(doc)
+
+			localStorage.setItem('user', JSON.stringify(user));
+
+			navigate('/', { replace: true });
 		}
 	};
 

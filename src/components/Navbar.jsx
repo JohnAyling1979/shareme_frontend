@@ -1,7 +1,10 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { IoMdAdd, IoMdSearch } from 'react-icons/io'
+import { useContext } from 'react';
+import UserContext from '../context/UserContext';
 
-const Navbar = ({ user, searchTermRef }) => {
+const Navbar = ({ searchTermRef }) => {
+	const user = useContext(UserContext);
 	const navigate = useNavigate();
 
 	if (!user) {

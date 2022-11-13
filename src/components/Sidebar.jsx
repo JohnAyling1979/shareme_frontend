@@ -4,17 +4,10 @@ import { RiHomeFill } from 'react-icons/ri';
 import logo from '../assets/logo.png';
 import { useContext } from 'react';
 import UserContext from '../context/UserContext';
+import { categories } from '../constant';
 
 const isNotActiveStyle = 'flex items-center px-5 gap-3 text-gray-500 hover:text-black transition-all duration-200 ease-in-out capitalize';
 const isActiveStyle = 'flex items-center px-5 gap-3 font-extrabold border-r-2 boarder-black transition-all duration-200 ease-in-out capitalize';
-const categories = [
-	{ name: 'Anime' },
-	{ name: 'Walapapers' },
-	{ name: 'Photography' },
-	{ name: 'Gaming' },
-	{ name: 'Coding' },
-	{ name: 'Other' },
-]
 
 const Sidebar = ({closeToggle}) => {
 	const user = useContext(UserContext);

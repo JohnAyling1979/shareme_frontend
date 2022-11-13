@@ -1,16 +1,45 @@
-import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useContext, useMemo, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import { MdDownloadForOffline } from 'react-icons/md';
+import { BsFillArrowUpRightCircleFill } from 'react-icons/bs';
+import { AiTwotoneDelete } from 'react-icons/ai';
 
 import { urlFor } from '../client';
+import UserContext from '../context/UserContext';
+import { savePost, deletePin } from '../api/api';
 
-const Pin = ({ pin: { title, postedBy, image, _id, destination } }) => {
-	const [postHovered, setPostHovered] = useState(true);
-	const alreadySaved = [];
-
+const Pin = ({ pin: { title, postedBy, image, _id, destination, save } }) => {
+	const [postHovered, setPostHovered] = useState(false);
+	const [savingPost, setSavingPost] = useState(false);
 	const navigate = useNavigate();
+	const user = useContext(UserContext);
+	const alreadySaved = useMemo(() => save?.filter(save => save.postedBy._id === user._id).length > 0 , [save, user]);
 
-	console.log(postHovered);
+	const onSave = e => {
+		console.log('clicked');
+		e.stopPropagation();
+
+		if (alreadySaved) {
+
+		} else {
+			setSavingPost(true);
+
+			savePost(_id, user._id, result => {
+				setSavingPost(false);
+
+				window.location.reload();
+			});
+		}
+	}
+
+	const onDelete = e => {
+		e.stopPropagation();
+
+		deletePin(_id, result => {
+			window.location.reload();
+		});
+	}
+
 	return (
 		<div className='m-2'>
 			<div
@@ -39,19 +68,49 @@ const Pin = ({ pin: { title, postedBy, image, _id, destination } }) => {
 									<MdDownloadForOffline />
 								</a>
 							</div>
-							{alreadySaved.length === 0 ? (
-								<button>
-								Save
-							</button>
-						) : (
-								<button>
-									Saved
+								<button
+									type='button'
+									className='bg-red-500 opacity-75 hover:opacity-100 hover:shadow-md text-white font-bold px-5 py-1 text-base rounded-3xl outline-none'
+									onClick={onSave}
+									disabled={savingPost}
+								>
+									{alreadySaved ? `${save.length} Saved` : 'Save'}
+								</button>
+						</div>
+						<div className='flex justify-between items-center gap-2 w-full'>
+							<a
+								className='bg-white flex items-center gap-2 text-black font-bold p-2 px-4 rounded-full opacity-70 hover:opacity-100 hover:shadow-md'
+								href={destination}
+								target='_blank'
+								rel='noreferrer'
+								onClick={e => e.stopPropagation()}
+							>
+								<BsFillArrowUpRightCircleFill />
+							</a>
+							{postedBy._id === user._id && (
+								<button
+									className='bg-white opacity-75 p-2 hover:opacity-100 hover:shadow-md font-bold text-dark text-base rounded-3xl outline-none'
+									type='button'
+									onClick={onDelete}
+								>
+									<AiTwotoneDelete />
 								</button>
 							)}
 						</div>
 					</div>
 				)}
 			</div>
+			<Link
+				className='flex gap-2 mt-2 items-center'
+				to={`user-profile/${postedBy._id}`}
+			>
+				<img
+					className='w-8 h-8 rounded-full object-cover'
+					src={postedBy.image}
+					alt={postedBy.userName}
+				/>
+				<p className='font-semibold capitalize'>{postedBy.userName}</p>
+			</Link>
 		</div>
 	);
 }

@@ -9,7 +9,7 @@ const pinData = `{
 	destination,
 	postedBy -> {
 		_id,
-		_userName,
+		userName,
 		image
 	},
 	save[] {

@@ -41,3 +41,9 @@ export const deletePin = async (postId, callback) => {
 
 	callback(result);
 }
+
+export const uploadPinImage = async (image, filename, contentType, callback) => {
+	const document = await client.assets.upload('image', image, { contentType, filename });
+
+	callback(document);
+}
